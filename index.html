@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spend Israel's Fortune</title>
+    <title>Spend a Billionaire's Fortune</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +18,6 @@
         }
         h1 {
             margin-top: 20px;
-            text-align: center; /* Center align the heading */
         }
         .items {
             display: grid;
@@ -46,68 +45,88 @@
             background-color: #45a049;
         }
         .fortune {
-            margin-top: 10px;
+            margin-top: 20px;
+        }
+        .purchase-history {
+            margin-top: 20px;
+            width: 80%;
+        }
+        .purchase-history h2 {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>
-            Since 1948 the U.S. has provided over $158 Billion in aid to Israel, making it the greatest recipient in history <br>
-            Let's put that money to better use
-        </h1>
-    </div>
+    <h1>Spend a Billionaire's Fortune</h1>
     <div class="fortune">
-        <h2>Remaining Fortune: $158,000,000,000</h2>
+        <h2>Remaining Fortune: $100,000,000,000</h2>
     </div>
     <div class="items">
         <div class="item">
             <h3>Private Jet</h3>
             <p>Price: $50,000,000</p>
-            <button onclick="buyItem(50000000)">Buy</button>
+            <button onclick="buyItem(50000000, 'Private Jet')">Buy</button>
         </div>
         <div class="item">
             <h3>Luxury Yacht</h3>
             <p>Price: $75,000,000</p>
-            <button onclick="buyItem(75000000)">Buy</button>
+            <button onclick="buyItem(75000000, 'Luxury Yacht')">Buy</button>
         </div>
         <div class="item">
             <h3>Super Car</h3>
             <p>Price: $2,000,000</p>
-            <button onclick="buyItem(2000000)">Buy</button>
+            <button onclick="buyItem(2000000, 'Super Car')">Buy</button>
         </div>
         <div class="item">
             <h3>Mansion</h3>
             <p>Price: $150,000,000</p>
-            <button onclick="buyItem(150000000)">Buy</button>
+            <button onclick="buyItem(150000000, 'Mansion')">Buy</button>
         </div>
         <div class="item">
             <h3>Private Island</h3>
             <p>Price: $100,000,000</p>
-            <button onclick="buyItem(100000000)">Buy</button>
+            <button onclick="buyItem(100000000, 'Private Island')">Buy</button>
         </div>
         <div class="item">
             <h3>Luxury Watch</h3>
             <p>Price: $200,000</p>
-            <button onclick="buyItem(200000)">Buy</button>
+            <button onclick="buyItem(200000, 'Luxury Watch')">Buy</button>
         </div>
         <div class="item">
             <h3>Space Tourism Ticket</h3>
             <p>Price: $250,000</p>
-            <button onclick="buyItem(250000)">Buy</button>
+            <button onclick="buyItem(250000, 'Space Tourism Ticket')">Buy</button>
         </div>
     </div>
 
-    <script>
-        let fortune = 158000000000; // Starting fortune of $158 billion
+    <div class="purchase-history">
+        <h2>Purchase History:</h2>
+        <ul id="history-list"></ul>
+    </div>
 
-        function buyItem(price) {
+    <script>
+        let fortune = 100000000000;
+        let purchaseHistory = [];
+
+        function buyItem(price, itemName) {
             if (fortune >= price) {
-                fortune -= price; // Deduct the price from the fortune
+                fortune -= price;
+                purchaseHistory.push(itemName);  // Add item to purchase history
                 document.querySelector('.fortune h2').innerText = `Remaining Fortune: $${fortune.toLocaleString()}`;
+                updatePurchaseHistory();  // Update the displayed history
             } else {
-                alert("You don't have enough money!"); // Alert if not enough funds
+                alert("You don't have enough money!");
             }
+        }
+
+        function updatePurchaseHistory() {
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';  // Clear the current list
+            purchaseHistory.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;  // Add each purchased item to the list
+                historyList.appendChild(li);
+            });
         }
     </script>
 </body>
